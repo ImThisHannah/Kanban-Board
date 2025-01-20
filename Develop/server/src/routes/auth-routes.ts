@@ -5,8 +5,8 @@ import bcrypt from 'bcrypt';
 
 export const login = async (req: Request, res: Response) => {
   // TODO: If the user exists and the password is correct, return a JWT token
-  if (User && await bcrypt.compare(password, User.passwordHash)) {
-    const token = jwt.sign({ userId: User.id }, 'your_secret_key', { expiresIn: '1h' }); 
+  if (User && await bcrypt.compare(password, User.password)) {
+    const token = jwt.sign({ userId: User.id }, '0000', { expiresIn: '1h' }); 
     return res.status(200).json({ token });
   }
 };
@@ -14,3 +14,4 @@ export const login = async (req: Request, res: Response) => {
 Router.post('/login', login);
 
 export default Router;
+  
