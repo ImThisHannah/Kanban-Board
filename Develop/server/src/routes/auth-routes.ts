@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 // TODO: If the user exists and the password is correct, return a JWT token
 
 export const login = async (req: Request, res: Response) => {
-  const { username, password } = req.body;  // Expect username and password in the request body
+  const { username, password } = req.body;   
 
   try {
     // Find the user by username
