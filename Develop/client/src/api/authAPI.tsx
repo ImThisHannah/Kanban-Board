@@ -1,16 +1,29 @@
 import { UserLogin } from "../interfaces/UserLogin";
-import axios from 'axios';
 
 const login = async (userInfo: UserLogin) => {
-// TODO: make a POST request to the login route
+  try {
+    const response = await fetch('/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(userInfo)
+    });
 
-    const response = await axios.post('/api/login', userInfo); 
-    const token = response.data.token; 
+    const data = await response.json();
 
-    localStorage.setItem('token', token);
+    if(!response.ok) {
+      throw new Error('User information not retrieved, check network tab!');
+    }
 
-    return token; 
+    return data;
+  } catch(err) {
+    console.log('Error from user login: ', err);
+    return Promise.reject('Could not fetch user info');
   }
+}
+
 
 
 export { login };
+
